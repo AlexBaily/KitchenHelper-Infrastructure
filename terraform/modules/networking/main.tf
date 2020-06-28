@@ -1,15 +1,14 @@
-
 resource "aws_vpc" "vpc" {
   cidr_block           = "${var.vpc_cidr}"
   enable_dns_hostnames = true
 
-  tags { Name = "${var.environment_name}" } 
+  tags = { Name = "${var.environment_name}" }
 }
 
 resource "aws_internet_gateway" "public" {
   vpc_id = "${aws_vpc.vpc.id}"
 
-  tags { Name = "${var.environment_name}" }
+  tags = { Name = "${var.environment_name}" }
 }
 
 
@@ -19,7 +18,7 @@ resource "aws_subnet" "public" {
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.cidrs)}"
 
-  tags { Name = "${var.environment_name} ${element(var.azs, count.index)}" }
+  tags = { Name = "${var.environment_name} ${element(var.azs, count.index)}" }
 }
 
 resource "aws_route_table" "public" {
@@ -39,11 +38,11 @@ resource "aws_route_table_association" "public_routes" {
 
 resource "aws_subnet" "private" {
   vpc_id            = "${aws_vpc.vpc.id}"
-  cidr_block        = "${element(var.priv_cidrs, count.index)}"
+  cidr_block        = "${element(var.private_cidrs, count.index)}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = 3
 
-  tags { Name = "${var.environment_name} Private ${element(var.azs, count.index)}" }
+  tags = { Name = "${var.environment_name} Private ${element(var.azs, count.index)}" }
 }
 
 resource "aws_route_table" "private" {
