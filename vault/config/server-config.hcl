@@ -5,6 +5,7 @@
 #Backed by S3 so we can run on ECS and don't have to use consul.
 #Not worried about HA for use case, would transfer to DynamoDB for HA.
 storage "s3" {
+  region     = "eu-west-1"
   bucket     = "kitchenhelper-vault"
 }
 
@@ -19,12 +20,6 @@ listener "tcp" {
 seal "awskms" {
     region = "eu-west-1"
     kms_key_id = "${KMS_KEY_ID}"
-}
-
-#Telemetry for metrics.
-telemetry {
-  statsite_address = "127.0.0.1:8125"
-  disable_hostname = true
 }
 
 #Enable the UI.
