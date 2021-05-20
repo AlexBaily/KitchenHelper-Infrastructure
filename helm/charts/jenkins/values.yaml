@@ -1,0 +1,7 @@
+image:
+  repository: jenkins
+  tag: latest
+  pullPolicy: always
+service:
+  type: NodePort
+replicaCount: 1
