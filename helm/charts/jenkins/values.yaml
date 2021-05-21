@@ -1,5 +1,5 @@
 image:
-  repository: jenkins
+  repository: jenkins/jenkins
   tag: latest
   pullPolicy: always
 service:
