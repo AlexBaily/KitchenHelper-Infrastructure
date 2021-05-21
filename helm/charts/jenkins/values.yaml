@@ -5,3 +5,4 @@ image:
 service:
   type: NodePort
 replicaCount: 1
+hostname: jenkins.alexbaily.com
