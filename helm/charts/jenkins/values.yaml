@@ -1,0 +1,8 @@
+image:
+  repository: jenkins/jenkins
+  tag: latest
+  pullPolicy: always
+service:
+  type: NodePort
+replicaCount: 1
+hostname: jenkins.alexbaily.com
